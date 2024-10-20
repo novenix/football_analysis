@@ -1,6 +1,7 @@
 
+from turtle import position
 from scipy import interpolate
-from utils import get_center_of_bbox, get_bbox_width
+from utils import get_center_of_bbox, get_bbox_width, get_foot_position
 import os
 import pickle
 import cv2
@@ -9,6 +10,7 @@ import pandas as pd
 from ultralytics import YOLO
 import supervision as sv
 import sys
+
 sys.path.append('../')
 
 
@@ -17,6 +19,8 @@ class Tracker:
         self.model = YOLO(model_path)
         #we will use goalkeepers as players (small dataset 631 fine tuned) with trakers and not predict
         self.tracker = sv.ByteTrack()
+
+
 
     #interpolate ball positions
     def interpolate_ball_positions(self, ball_positions):
@@ -38,6 +42,17 @@ class Tracker:
             detected_frames += detections_batch
             #break
         return detected_frames 
+
+    def add_position_to_tracks(self, tracks):
+        for object, object_tracks in tracks.items():
+            for frame_num, track in enumerate(object_tracks):
+                for track_id, track_info in track.items():
+                    bbox = track_info["bbox"]
+                    if object == "ball":
+                        position = get_center_of_bbox(bbox)
+                    else:
+                        position = get_foot_position(bbox)
+                    tracks[object][frame_num][track_id]["position"] = position
 
     def get_object_tracks(self, frames, read_from_stub=False, stub_path=None):
         stub_exists = os.path.exists(stub_path) if stub_path is not None else False
