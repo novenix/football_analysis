@@ -1,9 +1,11 @@
 
+from scipy import interpolate
 from utils import get_center_of_bbox, get_bbox_width
 import os
 import pickle
 import cv2
 import numpy as np
+import pandas as pd
 from ultralytics import YOLO
 import supervision as sv
 import sys
@@ -15,6 +17,19 @@ class Tracker:
         self.model = YOLO(model_path)
         #we will use goalkeepers as players (small dataset 631 fine tuned) with trakers and not predict
         self.tracker = sv.ByteTrack()
+
+    #interpolate ball positions
+    def interpolate_ball_positions(self, ball_positions):
+        ball_positions = [x.get(1, {}).get('bbox',[]) for x in ball_positions]
+        df_ball_positions = pd.DataFrame(ball_positions, columns=['x1', 'y1', 'x2', 'y2'])
+
+        # interpolate missing values
+        df_ball_positions = df_ball_positions.interpolate()
+        df_ball_positions = df_ball_positions.bfill()
+
+        ball_positions = [{1: {'bbox': x}} for x in df_ball_positions.to_numpy().tolist()]
+        return ball_positions
+
     def detect_frames(self, frames):
         batch_size = 20
         detected_frames = []
@@ -171,7 +186,35 @@ class Tracker:
 
         return frame
     
-    def draw_annotations(self,video_frames,tracks):
+    def draw_team_ball_control(self, frame, frame_num, team_ball_control):
+        # draw a semi-transparent rectangle to show the team that has the ball control
+        overlay = frame.copy()
+        cv2.rectangle(overlay, (1350, 850), (1900,970),(255,255,255), -1)
+        alpha = 0.4
+        cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
+        
+        #calculate the percentage of time that a team has the ball control
+        team_ball_control_till_frame = team_ball_control[:frame_num+1]
+        
+        #get the number of time each ime have the ball
+        team_1_num_frames = team_ball_control_till_frame[
+                        team_ball_control_till_frame == 1
+                        ].shape[0]
+        team_2_num_frames = team_ball_control_till_frame[
+                        team_ball_control_till_frame == 2
+                        ].shape[0]
+        #make statistics
+        team_1 = team_1_num_frames / (team_1_num_frames + team_2_num_frames)
+        team_2 = team_2_num_frames / (team_1_num_frames + team_2_num_frames)
+        
+        cv2.putText(frame, f"TEAM 1 BALL CONTROL: {team_1*100: .2f}%", (1400, 900), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 3)
+        cv2.putText(frame, f"TEAM 2 BALL CONTROL: {team_2*100: .2f}%", (1400, 950), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 3)
+
+        return frame
+    
+
+    def draw_annotations(self, video_frames, tracks, team_ball_control):
+    #def draw_annotations(self, video_frames, tracks):
         output_video_frames = []
         for frame_num, frame in enumerate(video_frames):
             # copy the frame to draw the annotations on it
@@ -185,10 +228,14 @@ class Tracker:
 
             for track_id, player in player_dict.items():
                 color = player.get("team_color", (0, 0, 255))
-                frame = self.draw_ellipse(frame, 
+                frame = self.draw_ellipse(frame,
                                           player["bbox"],
                                           color,
                                           track_id)
+                if player.get("has_ball", False):
+                    frame = self.daw_triangle(frame,
+                                              player["bbox"],
+                                              (0, 0, 255))
             #draw referee
             for _, referee in referee_dict.items():
                 frame = self.draw_ellipse(frame, 
@@ -199,6 +246,11 @@ class Tracker:
                 frame = self.daw_triangle(frame,
                                           ball["bbox"],
                                           (0, 255, 0))
+                
+            #draw team ball control
+            frame = self.draw_team_ball_control(frame, frame_num,
+                                                team_ball_control)
+
             # output_video_frames.append(frame_with_annotations)
             output_video_frames.append(frame)
 
