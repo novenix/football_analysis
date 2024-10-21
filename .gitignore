@@ -35,6 +35,8 @@ MANIFEST
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
+#ignore only content of models folder, but not the folder itself
+models/*
 
 # Unit test / coverage reports
 htmlcov/
