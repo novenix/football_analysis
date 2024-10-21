@@ -155,20 +155,20 @@ class Tracker:
             endAngle=235,
             color=color,
             lineType=cv2.LINE_4,
-            #thickness=2,
+            thickness=2,
         )
         #rectangle 
         rectangle_width = 40
         rectangle_height = 20
-        x1_rect = x_center - (rectangle_width // 2)
-        x2_rect = x_center + (rectangle_width // 2)
-        y1_rect = y2 - (rectangle_height // 2) +15
-        y2_rect = y2 + (rectangle_height // 2) +15
+        x1_rect = x_center - rectangle_width // 2
+        x2_rect = x_center + rectangle_width // 2
+        y1_rect = (y2 - rectangle_height // 2) +15
+        y2_rect = (y2 + rectangle_height // 2) +15
         
         if track_id is not None:
             cv2.rectangle(frame,
-                          (x1_rect, y1_rect),
-                          (x2_rect, y2_rect),
+                          (int(x1_rect),int( y1_rect)),
+                          (int(x2_rect),int( y2_rect)),
                           color,
                           cv2.FILLED,  # rectangle filled
                           )
@@ -179,10 +179,11 @@ class Tracker:
 
             cv2.putText(frame,
                         f"{track_id}",
-                        (int(x1_text), int(y2_rect + 15)),
+                        (int(x1_text), int(y1_rect + 15)),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.6,
                         (0, 0, 0),
+                        2
                         )
 
         return frame

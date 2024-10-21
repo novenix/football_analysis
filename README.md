@@ -1,4 +1,72 @@
 # football_analysis
 
+Football Analysis using Computer Vision
+This project uses computer vision to analyze videos of football matches. The analysis includes detecting players and balls, estimating camera movement, assigning teams to players, and estimating the speed and distance traveled by players.
+- output
+[![Watch the video](https://lh3.googleusercontent.com/fife/ALs6j_G2X4QEPJWfVG8KTVht8KbZARCf7kydvIsZBHxKPyDCuWSfbLs9xbtoKJGLwQZfHjdRljP90ufo9-crqju4uUUNy0_AN74J36DeeJdxNE_SwIAcfNe3jjWQrNXXYotqwcyctg7a1q6-IoSsOsov8SdZL-LVo0TDOfelsG7lEk4ZHFM8Nnj8pZFsU2ioUdpXip_U-s8DCo_CATP25wVn-pIwNyaA1BTdB3H9P5Rlv6_uP4ZyeNaWu0VJcOMGuiQ0Vekv7AQo-5D3Fhv5TQXlxd_j4ZuhkQEDvKDVZkRP0qAioLJ03TbJYiTN5gQLVnNtWh43FUTlMe8XepUZlbjQloRkPsRQXwnTOHPZAG-yqu1kOnvftNE2VsKZHcQ9IePDsIF2pEa3MSkuBI8so78_e1lqJhFd2KaFI6F3KOjL1MmsPcRLLmAfpA-M-OVp7qAqf4tr2MyfDGOMouxltBzMPXjjBlejgi-y_fSNFFx3tBSUeUAtpO3YgNxIjz5QTg7Iz2okfcTYCBC934KQCa4PA_JIZgHARPjQkc0x1BObhj--_DyH45wXLhOtRyE3guHpz1U0-jBBsDAQxkZqbcMXHl0yl56YE-uyiNm4UxaHxcVUtYTQLmV6WeC87QcbDrzwbHmZH7RIHw1V6-Ju4PwZncoTlMcdiPlV48zZjAF5NcbHhL9mekYiFpSmuZXxBt_AOsz0lNeNQEwJgRiwM4ndmLmHl0a-YNpWZPn1Dh6uTeZLN0gdofZTk_SyR3rMog-kmGjYQjYcit8Jsf9M6FmSazfV5S0gg9vfZNahbjsukpLoYqVYXBisxinYt-kdqAjepqczZvJtskTva2sFBibT0mrW6VSAj1vi5k8N2HCPU8fT3-CHm7YtMi7aBjiBNCNCDYSsaPSxTD0GY1bnINJfx60KMEcGOsNpMzeolKt4L-eM0dV449H2uBoMD_lJk4zhOu1H9CR2O2JhZEVddJIJio6vBAN7hs0XYR3LySWLJ1lWi8NDSMTuWfqf0AuA_PsOGkGpoBxtbEoj_To3nYfFA_oR7POFRNehMEp8WnPuwNi_pB8cetqXqcXlQm5bdym2CA285lM4Qs-3uCwUiydN2j2AJFl5rHs8oTgwxeSg73-hgbmGfu5HYg4iq1N-PzhgGeR5tcyJ2P-bpiJZrk05Ws5xu9WtG9Ego-vOAAw2_1qDRLSNh7ouXHJ8kIEx5EZtL2qEqSG_6trLBD9KdxIJZ_X1uve65xo8GTYQ5pkF0g8v4Xgy7SXGKuxu89FgkaRq9xzX06LEn-vAZuXJbO30w0XblrkZOBzldsYLnXHrRvnYPClG6pN_lSrwkPq1ZIFypbNUvmipYeq23vD0F2oGsR2XReK4-tb8eMSAaGTeXFb6nuz81uLWLPEvx3HNUX3jDZoVsA2o-qYZMrXgouTuDjyhsOdnfEr3EBdeuJyUOl3Qc0YpWECbze09Uas_Ij0eOwBo5cNYt7eOwcQcan9lKVweq504qiCyNdLXGwReg-3QQ3YYWtk5hMGYWboTpkFd9toDsVClondrvDzJ-fHNXcDUhvFtj-QNORxi5T8R1WNRTvGpxzsMg6DMRIHxKhVqw0XZk4vSzTDj0sfHydpwCIaRagxIlOaYDaxnOyGe8PSeyG0Zm4W2=s320-w320-h200-p-k-nu)](https://drive.google.com/file/d/1tbV0oI5W-_P4mFSZgs3NC5C6UF8qvnUE/view?usp=sharing)
+
+
+## Requirements
+Python 3.9 or higher
+Poetry for dependency management
+
+## Installation
+1. Clone the repository:
+```sh     
+git clone https://github.com/your-username/football_analysis.git     
+cd football_analysis
+```
+
+2. Create and activate a virtual environment:
+
+```sh
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+3. Install the dependencies:
+```sh 
+poetry install
+```
+
+## Usage
+1. Place the video you want to analyze in the input_videos folder.
+
+- download the base video
+[![download the video](https://lh3.googleusercontent.com/fife/ALs6j_EzPDU7MWWdBSo9mMWkxHAwtBSAfd6SA6c9R3petRgad7tbzswBIYwxorSMrkA8eqvtjUa-MPER3eqtlY41cx_QQz-Ww26LQ6m6HyCbi6yEZA617eSXIKUJsNx87wGPxpioe8adYIhfZCgJNUBpNu_HNO6V2ei7sB8MjjoLnNoX70QsPylie97FmzCk5w9Lw8vx93vEjKu0jJKflU3SKX_B4AqqmO6xBHHezGDE-c_UISTAoAiVVnkxPhONM4hYJPcNC-TRwj7stSmtIJpWOsgwRFTa_8KWZ33iuSkxi32bUp1FqYa8YhipPX6mnWqFlcOCsQV55t8W_GEVlPdc53ibhGzTzqkklYD_iLB6YHUIPZNVaniqNR9nzr3QIJUd5F-9ZMznd8XtoTWcpBys1Jj_jqV36y_ENkRLIY0L0qn2m2SaMqlqph1tlJ0vwhn8d3PLonFx1c9qrYb4MBlq7orB0zI_k9-1C6oeHi7a7puE5FQmxQWlm9kMNAwBU99xUJ794YsjF2zRxmtWY_axAFLwv3NkWCB5nxd8wY-YZ4V67oHnpTMmyqDbjld9oWm9eF1vTPVwMt0qQOA7APJOLTp8IkaoqmPQh_oaCjTuNtoUYq43i20Wbjg86hFgpB0JCDB-W1Sntjv0ye51Q_5Wc5Fs2Fao5mNVUd_ijWrfJRtXNdHgNzIAaty7S1lS7gsanXjILjaEY0VOdn7CmPn-CfMEoR1aRrqu3IlKlCbPCCZOUNgqu2Yhn8XLcUc7qCUpWIdu-qyX3q9jwAA7l6mBj9OWf_ThTXzGS4oeHgisuXUcKj7VtbjyrEF21TERqgxECEvf_HUJirFd0xuUAEO1i_YlHq_4UlQ_S3f02LA4icmjysZzoa9fF-GvRhBQJn54cm5iYhratHhYJ3uBRH5JYyFWPVEyQm14ozncaHhvr8zepUDoIRMZnIPqybczBK3dUX9G8KcHNK1noaUPYMyy_SRx9TaPFa8aruUnP-JPiP7b6ar71BEeKs--NgzbqzaPPQ2fHjVyxuLzfsvM7bBW8RQw4jg18P2JBaXFIOOdrJRDqxcs_4wdxjwU8l3Sc5thYXw6YpYtbuzCaxrgSa6Q5QD0BZhVSTM9Ui3y6N4RKn2eRBF3wIHzpAzHprQSxCBTvR5AX30GCB0adEsP8smaOgJ4NtbS4xVp0g193hpvAvmUQbxoPdNvt54RrmQnCYZH_gBaFpKPBpOzHNf3_Q8UqsQp7Foitf2zYrSUB2_rS-uwS-cyA9WDkBWcvrkU2IXVgpv8rO5H8HP1lQ_ULadRUs7Q_KlztbB0H1pKjfzzFjEsvjK7SGPYEEz_Q7MZbx0UWMaLZZwLEjBXTQJgs03B_UJKvzqK9lKTCnVXdtH8aJNnluV9S4c8ab83dKzo14xDu3r5rhDi9aEcM1a8fMhoHOoYGVfq5msyIGg0p5oWHt-4fP7aeizk01HAg1Tn9ZV8jRWX2cojIZYYI_oJtw3OCM_Wuz-Tsi7fra8gzc0yYLn3OHToGR0Q0qn88OeEf_NoLDHyMMVfNIrfuR9r8xrOuNEer_ez4i5Bti8gSVZl1y6NYrcQS0iplyaZQeI2iNsviqiRQD8eh897LMbZZhkEHtOR_B86JgWCd5p1GsnX0_sdyf7Xb5zuNw=s320-w320-h200-p-k-nu)](https://drive.google.com/file/d/1I3ynJTaku-2r15ZRgMI1YVe86lvReUzQ/view?usp=drive_link)
+
+2. Run the main script:
+
+```sh
+python main.py
+```
+
+- This will process the video and generate an output video with annotations in the output_videos folder like this.
+[![Watch the video](https://lh3.googleusercontent.com/fife/ALs6j_G2X4QEPJWfVG8KTVht8KbZARCf7kydvIsZBHxKPyDCuWSfbLs9xbtoKJGLwQZfHjdRljP90ufo9-crqju4uUUNy0_AN74J36DeeJdxNE_SwIAcfNe3jjWQrNXXYotqwcyctg7a1q6-IoSsOsov8SdZL-LVo0TDOfelsG7lEk4ZHFM8Nnj8pZFsU2ioUdpXip_U-s8DCo_CATP25wVn-pIwNyaA1BTdB3H9P5Rlv6_uP4ZyeNaWu0VJcOMGuiQ0Vekv7AQo-5D3Fhv5TQXlxd_j4ZuhkQEDvKDVZkRP0qAioLJ03TbJYiTN5gQLVnNtWh43FUTlMe8XepUZlbjQloRkPsRQXwnTOHPZAG-yqu1kOnvftNE2VsKZHcQ9IePDsIF2pEa3MSkuBI8so78_e1lqJhFd2KaFI6F3KOjL1MmsPcRLLmAfpA-M-OVp7qAqf4tr2MyfDGOMouxltBzMPXjjBlejgi-y_fSNFFx3tBSUeUAtpO3YgNxIjz5QTg7Iz2okfcTYCBC934KQCa4PA_JIZgHARPjQkc0x1BObhj--_DyH45wXLhOtRyE3guHpz1U0-jBBsDAQxkZqbcMXHl0yl56YE-uyiNm4UxaHxcVUtYTQLmV6WeC87QcbDrzwbHmZH7RIHw1V6-Ju4PwZncoTlMcdiPlV48zZjAF5NcbHhL9mekYiFpSmuZXxBt_AOsz0lNeNQEwJgRiwM4ndmLmHl0a-YNpWZPn1Dh6uTeZLN0gdofZTk_SyR3rMog-kmGjYQjYcit8Jsf9M6FmSazfV5S0gg9vfZNahbjsukpLoYqVYXBisxinYt-kdqAjepqczZvJtskTva2sFBibT0mrW6VSAj1vi5k8N2HCPU8fT3-CHm7YtMi7aBjiBNCNCDYSsaPSxTD0GY1bnINJfx60KMEcGOsNpMzeolKt4L-eM0dV449H2uBoMD_lJk4zhOu1H9CR2O2JhZEVddJIJio6vBAN7hs0XYR3LySWLJ1lWi8NDSMTuWfqf0AuA_PsOGkGpoBxtbEoj_To3nYfFA_oR7POFRNehMEp8WnPuwNi_pB8cetqXqcXlQm5bdym2CA285lM4Qs-3uCwUiydN2j2AJFl5rHs8oTgwxeSg73-hgbmGfu5HYg4iq1N-PzhgGeR5tcyJ2P-bpiJZrk05Ws5xu9WtG9Ego-vOAAw2_1qDRLSNh7ouXHJ8kIEx5EZtL2qEqSG_6trLBD9KdxIJZ_X1uve65xo8GTYQ5pkF0g8v4Xgy7SXGKuxu89FgkaRq9xzX06LEn-vAZuXJbO30w0XblrkZOBzldsYLnXHrRvnYPClG6pN_lSrwkPq1ZIFypbNUvmipYeq23vD0F2oGsR2XReK4-tb8eMSAaGTeXFb6nuz81uLWLPEvx3HNUX3jDZoVsA2o-qYZMrXgouTuDjyhsOdnfEr3EBdeuJyUOl3Qc0YpWECbze09Uas_Ij0eOwBo5cNYt7eOwcQcan9lKVweq504qiCyNdLXGwReg-3QQ3YYWtk5hMGYWboTpkFd9toDsVClondrvDzJ-fHNXcDUhvFtj-QNORxi5T8R1WNRTvGpxzsMg6DMRIHxKhVqw0XZk4vSzTDj0sfHydpwCIaRagxIlOaYDaxnOyGe8PSeyG0Zm4W2=s320-w320-h200-p-k-nu)](https://drive.google.com/file/d/1tbV0oI5W-_P4mFSZgs3NC5C6UF8qvnUE/view?usp=sharing)
+
+
+
+## Project Structure
+
+- [main.py](./main.py): Main script that coordinates the entire analysis.
+- [camera_movement_estimator](./camera_movement_estimator): Contains the code to estimate camera movement.
+- [team_assigner](./team_assigner): Contains the code to assign teams to players.
+- [player_ball_assigner](./player_ball_assigner): Contains the code to assign ball possession to players.
+- [speed_and_distance_estimator](./speed_and_distance_estimator): Contains the code to estimate the speed and distance traveled by players.
+- [view_transformer](./view_transformer): Contains the code to transform the positions of objects in the camera view.
+- [input_videos](./input_videos): Folder where the videos to be analyzed are placed.
+- [output_videos](./output_videos): Folder where the processed videos are saved.
+- [stubs](./stubs): Folder to store intermediate and test data.
+- [models](./models): Folder to store trained detection models.
+
+License
+This project is licensed under the MIT License. See the LICENSE file for details.   
+
+Contact
+For any questions, you can contact me.   
+
+
 "tracks, assig teams to tracks, ignore referees for labes, add triangle for ball"
 skip_credentials_check=true SKIP=pip-audit git commit -m  "tracks, assig teams to tracks, ignore referees for labes, add triangle for ball"
+
+This project was based on https://www.youtube.com/watch?v=neBZ6huolkg&list=PLL1NNMQPPXiJUebwjznlryjvV_PuCGVUa&index=4 tutorial from Code In a Jiffy
